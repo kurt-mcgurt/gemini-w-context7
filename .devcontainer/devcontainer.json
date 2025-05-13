@@ -10,7 +10,7 @@
       "version": "3.13"
     }
   },
-  "postCreateCommand": "npm install -g @upstash/context7-mcp@latest && pip install --upgrade google-genai>=1.15.0 gradio>=5.29.0",
+  "postCreateCommand": "./setup.sh",
   "forwardPorts": [7860],
   "remoteUser": "vscode"
 }
