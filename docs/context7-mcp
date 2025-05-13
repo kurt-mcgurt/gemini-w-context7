@@ -1,0 +1,447 @@
+TITLE: Configure Context7 MCP in VS Code
+DESCRIPTION: Provides the JSON configuration snippet to add to the VS Code MCP config file to integrate the Context7 server using `npx`.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_5
+
+LANGUAGE: json
+CODE:
+```
+{
+  "servers": {
+    "Context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
+```
+
+----------------------------------------
+
+TITLE: Create Dockerfile for Context7 MCP
+DESCRIPTION: Provides the content of a Dockerfile to build an image containing the Context7 MCP server, installing it globally using npm.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_9
+
+LANGUAGE: Dockerfile
+CODE:
+```
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install the latest version globally
+RUN npm install -g @upstash/context7-mcp@latest
+
+# Expose default port if needed (optional, depends on MCP client interaction)
+# EXPOSE 3000
+
+# Default command to run the server
+CMD ["context7-mcp"]
+```
+
+----------------------------------------
+
+TITLE: Configure Context7 MCP with Environment Variables
+DESCRIPTION: Provides a JSON configuration example showing how to pass environment variables, like `DEFAULT_MINIMUM_TOKENS`, to the Context7 MCP server via the client configuration.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_12
+
+LANGUAGE: json
+CODE:
+```
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"],
+      "env": {
+        "DEFAULT_MINIMUM_TOKENS": "10000"
+      }
+    }
+  }
+}
+```
+
+----------------------------------------
+
+TITLE: Build Context7 MCP Docker Image
+DESCRIPTION: Provides the bash command to build the Docker image from the Dockerfile, tagging it as `context7-mcp`. Requires Docker daemon to be running.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_10
+
+LANGUAGE: bash
+CODE:
+```
+docker build -t context7-mcp .
+```
+
+----------------------------------------
+
+TITLE: Configure MCP Client to Use Docker Image
+DESCRIPTION: Provides an example JSON configuration snippet for an MCP client (like `cline_mcp_settings.json`) to run the Context7 server within a Docker container using the built image.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_11
+
+LANGUAGE: json
+CODE:
+```
+{
+  "mcpServers": {
+    "Сontext7": {
+    "autoApprove": [],
+    "disabled": false,
+    "timeout": 60,
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "context7-mcp"],
+      "transportType": "stdio"
+    }
+  }
+}
+```
+
+----------------------------------------
+
+TITLE: Configuring MCP Client for Docker (JSON)
+DESCRIPTION: Example JSON configuration for an MCP client to connect to the Context7 server running in a Docker container. Uses the `docker` command with `run`, `-i`, `--rm`, and the image tag `context7-mcp`.
+SOURCE: https://github.com/upstash/context7/blob/master/docs/README.zh-CN.md#_snippet_1
+
+LANGUAGE: json
+CODE:
+```
+{
+  "mcpServers": {
+    "Сontext7": {
+    "autoApprove": [],
+    "disabled": false,
+    "timeout": 60,
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "context7-mcp"],
+      "transportType": "stdio"
+    }
+  }
+}
+```
+
+----------------------------------------
+
+TITLE: Configure Context7 MCP in Cursor (npx) - JSON
+DESCRIPTION: Configures the Context7 MCP server within Cursor's Model Context Protocol settings. This JSON snippet defines a server named 'context7' that uses 'npx' to run the latest version of the '@upstash/context7-mcp' package. This configuration should be placed in the Cursor mcp.json file. Requires Node.js.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_1
+
+LANGUAGE: json
+CODE:
+```
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
+```
+
+----------------------------------------
+
+TITLE: Building Context7 MCP Docker Image (Bash)
+DESCRIPTION: Builds a Docker image for the Context7 MCP server using the Dockerfile in the current directory. Requires Docker Desktop or daemon running.
+SOURCE: https://github.com/upstash/context7/blob/master/docs/README.zh-CN.md#_snippet_0
+
+LANGUAGE: bash
+CODE:
+```
+docker build -t context7-mcp .
+```
+
+----------------------------------------
+
+TITLE: Configure Context7 MCP in Cursor (bunx) - JSON
+DESCRIPTION: An alternative configuration for Cursor's MCP settings using 'bunx' instead of 'npx'. This is suitable if you prefer or are using Bun as your JavaScript runtime and package manager. Requires Bun installed.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_2
+
+LANGUAGE: json
+CODE:
+```
+{
+  "mcpServers": {
+    "context7": {
+      "command": "bunx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
+```
+
+----------------------------------------
+
+TITLE: Configure MCP Client for Local Development
+DESCRIPTION: Provides a JSON configuration example for an MCP client to run the Context7 server directly from the local source code using `tsx`.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_15
+
+LANGUAGE: json
+CODE:
+```
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["tsx", "/path/to/folder/context7-mcp/src/index.ts"]
+    }
+  }
+}
+```
+
+----------------------------------------
+
+TITLE: Configuring MCP Client for Local Development (npx tsx) (JSON)
+DESCRIPTION: Example JSON configuration for an MCP client to connect to the Context7 server running locally using `npx tsx`. Specifies the command and the path to the server's entry point.
+SOURCE: https://github.com/upstash/context7/blob/master/docs/README.zh-CN.md#_snippet_4
+
+LANGUAGE: json
+CODE:
+```
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["tsx", "/path/to/folder/context7-mcp/src/index.ts"]
+    }
+  }
+}
+```
+
+----------------------------------------
+
+TITLE: Configure Context7 MCP in Windsurf (npx) - JSON
+DESCRIPTION: Configures the Context7 MCP server within Windsurf's MCP configuration file. Similar to the Cursor configuration, this uses 'npx' to run the latest version of the Context7 MCP package. Requires Node.js.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_4
+
+LANGUAGE: json
+CODE:
+```
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
+```
+
+----------------------------------------
+
+TITLE: Configure Context7 MCP in Zed
+DESCRIPTION: Provides the JSON configuration snippet to add to Zed's `settings.json` file to integrate the Context7 server using `npx`.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_6
+
+LANGUAGE: json
+CODE:
+```
+{
+  "context_servers": {
+    "Context7": {
+      "command": {
+        "path": "npx",
+        "args": ["-y", "@upstash/context7-mcp@latest"]
+      },
+      "settings": {}
+    }
+  }
+}
+```
+
+----------------------------------------
+
+TITLE: Configure Context7 MCP in Claude Desktop
+DESCRIPTION: Provides the JSON configuration snippet to add to the `claude_desktop_config.json` file to integrate the Context7 server using `npx`.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_8
+
+LANGUAGE: json
+CODE:
+```
+{
+  "mcpServers": {
+    "Context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
+```
+
+----------------------------------------
+
+TITLE: Configure Context7 MCP in Cursor (Deno) - JSON
+DESCRIPTION: Configures the Context7 MCP server in Cursor using Deno as the runtime. This configuration runs the package directly from npm via Deno's compatibility layer, requiring network and environment permissions. Requires Deno installed.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_3
+
+LANGUAGE: json
+CODE:
+```
+{
+  "mcpServers": {
+    "context7": {
+      "command": "deno",
+      "args": ["run", "--allow-env", "--allow-net", "npm:@upstash/context7-mcp"]
+    }
+  }
+}
+```
+
+----------------------------------------
+
+TITLE: Configuring MCP Client for Troubleshooting (bunx) (JSON)
+DESCRIPTION: Alternative JSON configuration for an MCP client using `bunx` instead of `npx` to run the Context7 server. This is suggested as a solution for `ERR_MODULE_NOT_FOUND` errors.
+SOURCE: https://github.com/upstash/context7/blob/master/docs/README.zh-CN.md#_snippet_6
+
+LANGUAGE: json
+CODE:
+```
+{
+  "mcpServers": {
+    "context7": {
+      "command": "bunx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
+```
+
+----------------------------------------
+
+TITLE: Configure MCP Inspector to use bunx (JSON)
+DESCRIPTION: JSON configuration snippet for MCP Inspector to use `bunx` instead of `npx` to run the Context7 MCP server, potentially resolving module not found errors.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_17
+
+LANGUAGE: json
+CODE:
+```
+{
+  "mcpServers": {
+    "context7": {
+      "command": "bunx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
+
+```
+
+----------------------------------------
+
+TITLE: Configure MCP Inspector with experimental VM modules (JSON)
+DESCRIPTION: JSON configuration snippet for MCP Inspector to run the Context7 MCP server with the `--experimental-vm-modules` Node.js flag via `npx`, addressing potential ESM resolution issues.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_18
+
+LANGUAGE: json
+CODE:
+```
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "--node-options=--experimental-vm-modules",
+        "@upstash/context7-mcp@1.0.6"
+      ]
+    }
+  }
+}
+
+```
+
+----------------------------------------
+
+TITLE: Testing MCP Inspector with Upstash Context7 (Bash)
+DESCRIPTION: Command to test the Upstash Context7 MCP server using the MCP Inspector tool via npx.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_16
+
+LANGUAGE: bash
+CODE:
+```
+npx -y @modelcontextprotocol/inspector npx @upstash/context7-mcp@latest
+
+```
+
+----------------------------------------
+
+TITLE: Testing Context7 with MCP Inspector (Bash)
+DESCRIPTION: Uses `npx` to run the `@modelcontextprotocol/inspector` and connects it to the `@upstash/context7-mcp` package, typically for testing the server's functionality.
+SOURCE: https://github.com/upstash/context7/blob/master/docs/README.zh-CN.md#_snippet_5
+
+LANGUAGE: bash
+CODE:
+```
+npx -y @modelcontextprotocol/inspector npx @upstash/context7-mcp@latest
+```
+
+----------------------------------------
+
+TITLE: Install Context7 MCP in Claude Code
+DESCRIPTION: Provides the shell command to add the Context7 MCP server configuration directly using the `claude mcp add` command.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_7
+
+LANGUAGE: sh
+CODE:
+```
+claude mcp add context7 -- npx -y @upstash/context7-mcp@latest
+```
+
+----------------------------------------
+
+TITLE: Install Context7 MCP via Smithery - Bash
+DESCRIPTION: Installs the Context7 MCP server using the Smithery CLI and npx, specifically targeting the Claude client. This command fetches and runs the latest version of the Context7 MCP package. Requires Node.js and the Smithery CLI.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_0
+
+LANGUAGE: bash
+CODE:
+```
+npx -y @smithery/cli install @upstash/context7-mcp --client claude
+```
+
+----------------------------------------
+
+TITLE: Install Development Dependencies
+DESCRIPTION: Provides the command using `bun` to install the project's dependencies for local development.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_13
+
+LANGUAGE: bash
+CODE:
+```
+bun i
+```
+
+----------------------------------------
+
+TITLE: Installing Context7 Dependencies (Bash)
+DESCRIPTION: Installs project dependencies using the `bun` package manager.
+SOURCE: https://github.com/upstash/context7/blob/master/docs/README.zh-CN.md#_snippet_2
+
+LANGUAGE: bash
+CODE:
+```
+bun i
+```
+
+----------------------------------------
+
+TITLE: Build Project for Development
+DESCRIPTION: Provides the command using `bun` to build the project for local development.
+SOURCE: https://github.com/upstash/context7/blob/master/README.md#_snippet_14
+
+LANGUAGE: bash
+CODE:
+```
+bun run build
+```
+
+----------------------------------------
+
+TITLE: Building Context7 Project (Bash)
+DESCRIPTION: Runs the build script defined in the project's `package.json` using `bun`.
+SOURCE: https://github.com/upstash/context7/blob/master/docs/README.zh-CN.md#_snippet_3
+
+LANGUAGE: bash
+CODE:
+```
+bun run build
+```
