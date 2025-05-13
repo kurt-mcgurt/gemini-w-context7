@@ -1,19 +1,16 @@
 {
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {
-    // Node.js ≥22.x for context7‑mcp
+    // Node.js ≥22 for context7‑mcp
     "ghcr.io/devcontainers/features/node:1": {
       "version": "22"
     },
-    // Python ≥3.13 for google‑genai and Gradio
+    // Python ≥3.13 for google‑genai & gradio
     "ghcr.io/devcontainers/features/python:1": {
       "version": "3.13"
     }
   },
-  // After container builds, install your MCP server + SDKs
-  "postCreateCommand":
-    "npm install -g @upstash/context7-mcp@latest && " +
-    "pip install --upgrade google-genai>=1.15.0 gradio>=5.29.0",
+  "postCreateCommand": "npm install -g @upstash/context7-mcp@latest && pip install --upgrade google-genai>=1.15.0 gradio>=5.29.0",
   "forwardPorts": [7860],
   "remoteUser": "vscode"
 }
