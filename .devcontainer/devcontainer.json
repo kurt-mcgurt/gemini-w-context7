@@ -11,7 +11,7 @@
     }
   },
   // After container builds, run the setup script
-  "postCreateCommand": "./setup.sh",
+  "postCreateCommand": "chmod +x ./setup.sh && ./setup.sh",
   "forwardPorts": [7860],
   "remoteUser": "vscode"
 }
