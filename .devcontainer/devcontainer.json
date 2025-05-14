@@ -1,15 +1,16 @@
 {
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {
-    // Node.js ≥22 for context7‑mcp
+    // Node.js ≥22.x for context7‑mcp
     "ghcr.io/devcontainers/features/node:1": {
       "version": "22"
     },
-    // Python ≥3.13 for google‑genai & gradio
+    // Python ≥3.13 for google‑genai and Gradio
     "ghcr.io/devcontainers/features/python:1": {
       "version": "3.13"
     }
   },
+  // After container builds, run the setup script
   "postCreateCommand": "./setup.sh",
   "forwardPorts": [7860],
   "remoteUser": "vscode"
