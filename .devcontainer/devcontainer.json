@@ -1,5 +1,5 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "image": "mcr.microsoft.com/devcontainers/universal:1",
   "features": {
     // Node.js ≥22.x for context7‑mcp
     "ghcr.io/devcontainers/features/node:1": {
