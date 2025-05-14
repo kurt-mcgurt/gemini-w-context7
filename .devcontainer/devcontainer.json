@@ -1,5 +1,5 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/universal:1",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
     // Node.js ≥22.x for context7‑mcp
     "ghcr.io/devcontainers/features/node:1": {
@@ -10,8 +10,8 @@
       "version": "3.13"
     }
   },
-  // After container builds, run the setup script
+  // After container builds, make the setup script executable and run it
   "postCreateCommand": "chmod +x ./setup.sh && ./setup.sh",
-  "forwardPorts": [7860]
-//  "remoteUser": "vscode"
+  "forwardPorts": [7860],
+  "remoteUser": "vscode"
 }
