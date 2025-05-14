@@ -12,6 +12,6 @@
   },
   // After container builds, run the setup script
   "postCreateCommand": "chmod +x ./setup.sh && ./setup.sh",
-  "forwardPorts": [7860]
+  "forwardPorts": [7860],
   "remoteUser": "kurt-mcgurt"
 }
