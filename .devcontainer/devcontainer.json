@@ -3,7 +3,7 @@
   "features": {
     // Node.js ≥22.x for context7‑mcp
     "ghcr.io/devcontainers/features/node:1": {
-      "version": "22"
+      "version": "lts"
     },
     // Python ≥3.13 for google‑genai and Gradio
     "ghcr.io/devcontainers/features/python:1": {
@@ -11,7 +11,7 @@
     }
   },
   // After container builds, make the setup script executable and run it
-  "postCreateCommand": "chmod +x ./setup.sh && ./setup.sh",
+  "postCreateCommand": "npm install && chmod +x ./setup.sh && ./setup.sh",
   "forwardPorts": [7860],
   "remoteUser": "vscode"
 }
